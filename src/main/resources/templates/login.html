@@ -1,0 +1,11 @@
+<th:block th:insert="~{blocks/header}"></th:block>
+    <form action="/login" method="post">
+        <label for="email">Email:</label>
+        <input type="email" name="username" id="email"><br><br>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password"><br><br>
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+        <input type="submit" value="Login">
+    </form><br>
+    <a href="/registration">Registration</a>
+<th:block th:insert="~{blocks/footer}"></th:block>

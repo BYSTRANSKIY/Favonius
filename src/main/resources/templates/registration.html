@@ -1,0 +1,22 @@
+<th:block th:insert="~{blocks/header}"></th:block>
+    <h1 th:if="${error}" th:text="${error}" style="color: red"></h1>
+    <form action="/registration" method="post">
+        <div th:if="${usernameError}" style="color: red">
+            <span th:text="${usernameError}"></span>
+        </div>
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username"><br><br>
+        <div th:if="${emailError}" style="color: red">
+            <span th:text="${emailError}"></span>
+        </div>
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email"><br><br>
+        <label for="phoneNumber">PhoneNumber:</label>
+        <input type="text" name="phoneNumber" id="phoneNumber"><br><br>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password"><br><br>
+        <input type="hidden" name="_csrf" th:value="${_csrf.getToken()}">
+        <input type="submit" value="Register now">
+    </form>
+    <a href="/login">Login</a>
+<th:block th:insert="~{blocks/footer}"></th:block>

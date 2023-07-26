@@ -1,0 +1,6 @@
+<th:block th:insert="~{blocks/header}"></th:block>
+    <div th:if="${user.getEmail()}" >
+        <span th:text="${user.getUsername()}"></span>
+    </div>
+    <a href="/login">Log-in</a> | <a href="/registration">Registration</a>
+<th:block th:insert="~{blocks/footer}"></th:block>
