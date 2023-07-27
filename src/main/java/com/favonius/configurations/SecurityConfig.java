@@ -1,4 +1,4 @@
-package com.favonius.security;
+package com.favonius.configurations;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -24,7 +24,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/", "/product/**", "/images/**", "user/**", "/registration").permitAll()
+                        .requestMatchers("/static/**", "/", "/product/**", "/images/**", "user/**", "/registration").permitAll()
                         .requestMatchers("/admin/**").hasAuthority("ADMIN")
                         .anyRequest().authenticated())
                 .formLogin(form -> form

@@ -1,4 +1,7 @@
 package com.favonius.repositories;
 
-public class ProductRepository {
+import com.favonius.entities.Product;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ProductRepository extends JpaRepository<Product, Long> {
 }
