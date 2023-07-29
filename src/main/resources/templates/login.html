@@ -1,11 +1,35 @@
 <th:block th:insert="~{blocks/header}"></th:block>
-    <form action="/login" method="post">
-        <label for="email">Email:</label>
-        <input type="email" name="username" id="email"><br><br>
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password"><br><br>
+<div class="form login">
+    <span class="title">Login</span>
+    <form action="/login" method="POST">
+        <div class="input-data">
+            <div class="input-field">
+                <input type="text" name="username" placeholder="Enter your email" required>
+                <i class="ri-mail-line icon"></i>
+            </div>
+            <div class="input-field">
+                <input type="password" name="password" placeholder="Enter your password" required>
+                <i class="ri-lock-line icon"></i>
+                <i class="ri-eye-off-line showHidePw"></i>
+            </div>
+        </div>
+        <div class="checkbox-text">
+            <div class="checkbox-content">
+                <input type="checkbox" id="logCheck">
+                <label for="logCheck">Remember me</label>
+            </div>
+            <a href="#" class="link">Forgot password?</a>
+        </div>
         <input type="hidden" name="_csrf" th:value="${_csrf.getToken()}">
-        <input type="submit" value="Login">
-    </form><br>
-    <a href="/registration">Registration</a>
+        <div class="input-field submit">
+            <input type="submit" value="Login now">
+        </div>
+    </form>
+    <div class="login-signup">
+        <span>I don't have an account</span>
+        <i class="ri-arrow-right-circle-line"></i>
+        <a href="/registration" class="link">Register</a>
+        <i class="ri-arrow-left-circle-line"></i>
+    </div>
+</div>
 <th:block th:insert="~{blocks/footer}"></th:block>
