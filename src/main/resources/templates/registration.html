@@ -1,22 +1,47 @@
 <th:block th:insert="~{blocks/header}"></th:block>
-    <h1 th:if="${error}" th:text="${error}" style="color: red"></h1>
+<div class="form register">
+    <span class="title">Register</span>
     <form action="/registration" method="post">
-        <div th:if="${usernameError}" style="color: red">
-            <span th:text="${usernameError}"></span>
+        <div class="input-data">
+            <div class="input-field">
+                <input type="text" name="username" placeholder="Enter your username" required>
+                <i class="ri-user-3-line icon"></i>
+            </div>
+            <div th:if="${usernameError}">
+                <span class="error-message"><i class="ri-error-warning-line"></i> <span th:text="${usernameError}"></span></span>
+            </div>
+            <div class="input-field">
+                <input type="email" name="email" placeholder="Enter your email" required>
+                <i class="ri-mail-line icon"></i>
+            </div>
+            <div th:if="${emailError}">
+                <span class="error-message"><i class="ri-error-warning-line"></i> <span th:text="${emailError}"></span></span>
+            </div>
+            <div class="input-field">
+                <input type="text" name="phoneNumber" placeholder="Enter your phone number" required>
+                <i class="ri-phone-line icon"></i>
+            </div>
+            <div class="input-field">
+                <input type="password" name="password" placeholder="Enter your password" required>
+                <i class="ri-lock-line icon"></i>
+                <i class="ri-eye-off-line showHidePw"></i>
+            </div>
+            <ul>
+                <li th:each="error : ${errors}">
+                    <span class="error-message"><i class="ri-error-warning-line"></i> <span th:text="${error.defaultMessage}"></span></span><br>
+                </li>
+            </ul>
         </div>
-        <label for="username">Username:</label>
-        <input type="text" name="username" id="username"><br><br>
-        <div th:if="${emailError}" style="color: red">
-            <span th:text="${emailError}"></span>
-        </div>
-        <label for="email">Email:</label>
-        <input type="email" name="email" id="email"><br><br>
-        <label for="phoneNumber">PhoneNumber:</label>
-        <input type="text" name="phoneNumber" id="phoneNumber"><br><br>
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password"><br><br>
         <input type="hidden" name="_csrf" th:value="${_csrf.getToken()}">
-        <input type="submit" value="Register now">
+        <div class="input-field submit">
+            <input type="submit" value="Register now">
+        </div>
     </form>
-    <a href="/login">Login</a>
+    <div class="login-signup">
+        <span>I already have an account</span>
+        <i class="ri-arrow-right-circle-line"></i>
+        <a href="/login" class="link">Login</a>
+        <i class="ri-arrow-left-circle-line"></i>
+    </div>
+</div>
 <th:block th:insert="~{blocks/footer}"></th:block>

@@ -12,6 +12,7 @@
     --bg-header-color: #404040;
     --bg-footer-color: #606060;
     --bg-card-color: #C0C0C0;
+    --error-color: #FF3333;
     --text-color: white;
     --main-color: gold;
 }
@@ -200,6 +201,16 @@ header {
 
 .input-data .input-field input:is(:focus, :valid)  ~ i.showHidePw {
     color: white;
+}
+
+.input-data .error-message {
+    color: var(--error-color);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.error-message i {
+    font-size: 15px;
 }
 
 .input-field i {

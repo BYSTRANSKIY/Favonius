@@ -24,8 +24,8 @@ public class UserController {
     @PostMapping("/registration")
     public String registration(@Valid User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("error", "ERROR");
-            return "registration";
+            model.addAttribute("errors", result.getAllErrors());
+            return "/registration";
         }
         boolean isUsernameExists = userService.isUsernameExists(user.getUsername());
         boolean isEmailExists = userService.isEmailExists(user.getEmail());
