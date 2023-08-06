@@ -1,6 +1,29 @@
 <th:block th:insert="~{blocks/header}"></th:block>
-    <div th:if="${user.getEmail()}" >
-        <span th:text="${user.getUsername()}"></span>
+<div class="search-container">
+    <form action="/" class="flex-center" method="get">
+        <div class="search-field flex-center">
+            <select name="type">
+                <option value="ALL">All</option>
+                <option value="CLOTH">Cloth</option>
+                <option value="ELECTRONICS">Electronics</option>
+                <option value="BOOKS">Books</option>
+            </select>
+            <input type="text" class="input-search" name="title" placeholder="product">
+            <button type="submit" class="search-btn"><i class="ri-search-line"></i></button>
+        </div>
+    </form>
+</div>
+<div class="card-group">
+    <div class="card" th:each="product : ${products}">
+        <img th:src="'/images/' + ${product.getImages().get(0).getId()}" alt="Error">
+        <div class="card-info">
+            <p class="product-title" th:text="${product.getTitle()}"></p>
+            <p class="product-description" th:text="${product.getDescription()}"></p>
+            <div class="flex-center">
+                <p class="product-price" th:text="'$' + ${product.getPrice()}"></p>
+                <a href="#" class="add-to-cart"><i class="ri-shopping-cart-line"></i></a>
+            </div>
+        </div>
     </div>
-    <a href="/login">Log-in</a> | <a href="/registration">Registration</a>
+</div>
 <th:block th:insert="~{blocks/footer}"></th:block>

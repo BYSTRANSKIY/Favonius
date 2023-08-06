@@ -12,8 +12,8 @@
     --bg-header-color: #404040;
     --bg-footer-color: #606060;
     --bg-card-color: #C0C0C0;
-    --error-color: #FF3333;
     --text-color: white;
+    --error-color: #FF3333;
     --main-color: gold;
 }
 
@@ -24,27 +24,30 @@ body {
 
 header {
     position: fixed;
-    width: 100%;
     top: 0;
     right: 0;
+    width: 100%;
     z-index: 1000;
-    align-items: center;
-    padding: 15px 10%;
-    display: flex;
+    padding: 10px 0;
     background-color: var(--bg-header-color);
     transition: all .50s ease;
-    justify-content: space-between;
 }
 
-.logo {
+.container {
+    max-width: 1140px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.flex-center {
     display: flex;
     align-items: center;
 }
 
-.svg {
-    filter: invert(70%) sepia(100%) saturate(500%);
-    width: 40px;
-    margin-right: 10px;
+header > .flex-center {
+    justify-content: space-between;
 }
 
 .logo span {
@@ -53,8 +56,11 @@ header {
     font-weight: 600;
 }
 
-.navbar {
-    display: flex;
+.svg {
+    filter: invert(75%) sepia(100%) saturate(500%);
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
 }
 
 .navbar a {
@@ -74,11 +80,6 @@ header {
     color: var(--main-color);
 }
 
-.main {
-    display: flex;
-    align-items: center;
-}
-
 .main a {
     color: var(--text-color);
     margin-right: 25px;
@@ -88,19 +89,14 @@ header {
     transition: all .50s ease;
 }
 
-.user {
-    display: flex;
-    align-items: center;
+.main a:hover {
+    color: var(--main-color);
 }
 
 .user i {
     color: var(--main-color);
     font-size: 28px;
     margin-right: 7px;
-}
-
-.main a:hover {
-    color: var(--main-color);
 }
 
 #menu-icon {
@@ -115,8 +111,117 @@ header {
     color: var(--main-color);
 }
 
-.container {
-    margin-top: 70px;
+.content {
+    margin-top: 60px;
+    padding-top: 15px;
+}
+
+.search-container {
+    margin-bottom: 15px;
+}
+
+.search-btn {
+    color: var(--text-color);
+    background-color: var(--bg-header-color);
+    font-size: 25px;
+    margin-left: 5px;
+    height: 100%;
+    width: 50px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.search-btn:hover {
+    color: var(--main-color);
+}
+
+form .search-field {
+    height: 40px;
+    width: 100%;
+}
+
+.search-field .input-search {
+    color: var(--text-color);
+    background-color: var(--bg-header-color);
+    padding-left: 15px;
+    width: 100%;
+    height: 100%;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: none;
+}
+
+.search-field select {
+    color: var(--text-color);
+    font-size: 15px;
+    padding: 0px 15px;
+    background-color: var(--bg-header-color);
+    height: 100%;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border: none;
+    border-right: var(--bg-color) solid 2px;
+}
+
+.card-group {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+
+.card {
+    color: var(--text-color);
+    width:19%;
+    height: 350px;
+    margin:  0.5%;
+    background-color: var(--bg-header-color);
+    border-radius: 10px;
+}
+
+.card img {
+    width: 100%;
+    height: 60%;
+    padding: 3%;
+    border-radius: 15px;
+}
+
+.card-info {
+    width: 100%;
+    height: 40%;
+    padding: 0 3% 5% 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-info i {
+    color: var(--text-color);
+    font-size: 25px;
+    padding-right: 5px;
+}
+
+.card-info i:hover {
+    color: var(--main-color);
+}
+
+.product-title {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.product-description {
+    color: var(--bg-card-color);
+    font-size: 12px;
+}
+
+.product-price {
+    color: var(--main-color);
+    padding-left: 8px;
+}
+
+.card-info .flex-center {
+    justify-content: space-between;
 }
 
 .form {
@@ -277,9 +382,13 @@ header {
     font-weight: 600;
 }
 
-@media (max-width: 1280px) {
+@media (max-width: 1200px) {
+    .container {
+        max-width: 960px;
+    }
+
     header {
-        padding: 10px 2%;
+        padding: 5px 0;
         transition: .2s;
     }
 
@@ -288,12 +397,22 @@ header {
         margin: 0px 15px;
     }
 
-    .container {
-        margin-top: 60px;
+    .content {
+        margin-top: 50px;
+    }
+
+    .card {
+        width: 22%;
+        margin: 1.5%;
     }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 992px) {
+
+    .container {
+        max-width: 720px;
+    }
+
     #menu-icon {
         display: block;
     }
@@ -321,5 +440,30 @@ header {
 
     .navbar.open {
         right: 1%;
+    }
+
+    .card {
+        width: 30.33333%;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 540px;
+    }
+
+    .card {
+        width: 42%;
+        margin: 4%;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        max-width: 400px;
+    }
+
+    .card {
+        height: 250px;
     }
 }

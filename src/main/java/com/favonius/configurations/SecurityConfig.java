@@ -29,6 +29,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/login")
+                        .defaultSuccessUrl("/")
                         .permitAll())
                 .logout(LogoutConfigurer::permitAll);
         return http.build();
