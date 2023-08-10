@@ -10,14 +10,17 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.security.Principal;
+
 @Controller
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
 
     @GetMapping("/registration")
-    public String registration(Model model) {
-        model.addAttribute("pageTitle", "Registration");
+    public String registration(Model model, Principal principal) {
+        model.addAttribute("title", "Registration");
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
         return "registration";
     }
 
@@ -44,8 +47,9 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String login(Model model) {
-        model.addAttribute("pageTitle", "Login");
+    public String login(Model model, Principal principal) {
+        model.addAttribute("title", "Login");
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
         return "login";
     }
 }

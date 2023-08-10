@@ -23,6 +23,7 @@ public class Product {
     @Column(columnDefinition = "text")
     private String description;
     private int price;
+    private boolean availability;
     @Enumerated(EnumType.STRING)
     private Category category;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")

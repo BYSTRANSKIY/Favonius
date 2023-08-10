@@ -4,19 +4,22 @@ import com.favonius.entities.Image;
 import com.favonius.entities.Product;
 import com.favonius.entities.enums.Category;
 import com.favonius.repositories.ProductRepository;
+import com.favonius.services.ImageService;
 import com.favonius.services.ProductService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
+    private final ImageService imageService;
 
     @Override
     public List<Product> getProducts(String title, String category) {
@@ -33,29 +36,24 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void addProduct(Product product, MultipartFile file1, MultipartFile file2, MultipartFile file3) throws IOException {
-        addImageToProduct(product, file1);
-        addImageToProduct(product, file2);
-        addImageToProduct(product, file3);
+    public Product addProduct(Product product, MultipartFile file) throws IOException {
+        addImageToProduct(product, file);
+        product.setAvailability(true);
         product.setDateOfCreated(LocalDateTime.now());
-        productRepository.save(product);
+        return productRepository.save(product);
     }
 
-    private void addImageToProduct(Product product, MultipartFile file) throws IOException {
+    @Override
+    public Optional<Product> getProduct(Long id) {
+        return productRepository.findById(id);
+    }
+
+    @Override
+    public void addImageToProduct(Product product, MultipartFile file) throws IOException {
         if (file.getSize() != 0) {
-            Image image = toImageEntity(product, file);
+            Image image = imageService.toImageEntity(file);
+            image.setProduct(product);
             product.getImages().add(image);
         }
-    }
-
-    private Image toImageEntity(Product product, MultipartFile file) throws IOException {
-        Image image = new Image();
-        image.setProduct(product);
-        image.setName(file.getName());
-        image.setOriginalFileName(file.getOriginalFilename());
-        image.setContentType(file.getContentType());
-        image.setSize(file.getSize());
-        image.setBytes(file.getBytes());
-        return image;
     }
 }

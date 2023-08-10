@@ -1,13 +1,18 @@
 package com.favonius.services.impl;
 
+import com.favonius.entities.Image;
+import com.favonius.entities.Product;
 import com.favonius.entities.User;
 import com.favonius.entities.enums.Authority;
 import com.favonius.repositories.UserRepository;
+import com.favonius.services.ImageService;
 import com.favonius.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDateTime;
 
@@ -15,6 +20,7 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+    private final ImageService imageService;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -30,7 +36,7 @@ public class UserServiceImpl implements UserService {
         user.setActive(true);
         user.setDateOfCreated(LocalDateTime.now());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.getAuthorities().add(Authority.USER);
+        user.getAuthorities().add(Authority.ADMIN);
         userRepository.save(user);
     }
 
@@ -47,5 +53,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    private void addImageToUser(User user, MultipartFile file) throws IOException {
+        if (file.getSize() != 0) {
+            Image image = imageService.toImageEntity(file);
+            image.setUser(user);
+            user.getImages().add(image);
+        }
     }
 }

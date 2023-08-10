@@ -1,27 +1,13 @@
-<th:block th:insert="~{blocks/header}"></th:block>
-<div class="search-container">
-    <form action="/" class="flex-center" method="get">
-        <div class="search-field flex-center">
-            <select name="type">
-                <option value="ALL">All</option>
-                <option value="CLOTH">Cloth</option>
-                <option value="ELECTRONICS">Electronics</option>
-                <option value="BOOKS">Books</option>
-            </select>
-            <input type="text" class="input-search" name="title" placeholder="product">
-            <button type="submit" class="search-btn"><i class="ri-search-line"></i></button>
-        </div>
-    </form>
-</div>
+<th:block th:insert="~{blocks/header}" xmlns="http://www.w3.org/1999/html"></th:block>
 <div class="card-group">
     <div class="card" th:each="product : ${products}">
-        <img th:src="'/images/' + ${product.getImages().get(0).getId()}" alt="Error">
+        <a th:href="'/product/' + ${product.getId()}"><img th:src="'/images/' + ${product.getImages().get(0).getId()}" alt="Error"></a>
         <div class="card-info">
-            <p class="product-title" th:text="${product.getTitle()}"></p>
-            <p class="product-description" th:text="${product.getDescription()}"></p>
+            <a th:href="'/product/' + ${product.getId()}"><p class="product-title" th:text="${product.getTitle()}"></p></a>
+            <p class="product-availability" th:text="${product.getDescription()} ? 'Available' : 'Not available'"></p>
             <div class="flex-center">
                 <p class="product-price" th:text="'$' + ${product.getPrice()}"></p>
-                <a href="#" class="add-to-cart"><i class="ri-shopping-cart-line"></i></a>
+                <a href="/cart/add-product/id"><i class="ri-shopping-cart-line link cart"></i></a>
             </div>
         </div>
     </div>

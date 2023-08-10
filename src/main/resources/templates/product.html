@@ -1,0 +1,17 @@
+<th:block th:insert="~{blocks/header}"></th:block>
+<div class="product-container">
+    <img th:src="'/images/' + ${product.getImages().get(0).getId()}" alt="Error">
+    <div class="product-info">
+        <h1 class="title flex-center" th:text="${product.getTitle()}"></h1>
+        <h2 class="description" th:text="${product.getDescription()}"></h2>
+        <div class="product-data">
+            <h3 class="price flex-center" th:text="${product.getPrice()} + '₴'"></h3>
+            <h3 class="availability flex-center" th:text="${product.isAvailability() ? 'Available': 'Not available'}"></h3>
+            <h3 class="cart flex-center"><a href="/cart"><i class="ri-shopping-cart-line link"></i></a></h3>
+        </div>
+    </div>
+</div>
+<div class="edit-button">
+    <a href="/product/edit/id" class="link">Edit</a>
+</div>
+<th:block th:insert="~{blocks/footer}"></th:block>

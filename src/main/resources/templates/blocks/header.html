@@ -9,21 +9,38 @@
     <link href="https://fonts.googleapis.com/css2?family=REM:wght@500;600&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
     <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
-    <title th:fragment="title" th:text="${pageTitle}"></title>
+    <title th:fragment="title" th:text="${title}"></title>
 </head>
 <body>
 <header>
     <div class="container flex-center">
         <a href="/" class="logo flex-center"><img class="svg" src="/static/img/butterfly.svg" alt="Error"><span>Favonius</span></a>
-        <ul class="navbar flex-center">
-            <li><a href="/">Home</a></li>
-            <li><a href="#">Catalog</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Help</a></li>
-        </ul>
-        <div class="main flex-center">
-            <a href="/login" class="user flex-center"><i class="ri-user-fill"></i>Login</a>
-            <a href="/registration" class="user flex-center" title="Register"><i class="ri-indent-increase"></i>Register</a>
+        <div class="search-container">
+            <form action="/" method="get">
+                <div class="search-field flex-center">
+                    <select id="product-type" name="type">
+                        <option value="ALL">All</option>
+                        <option value="CLOTH">Cloth</option>
+                        <option value="ELECTRONICS">Electronics</option>
+                        <option value="BOOKS">Books</option>
+                    </select>
+                    <input type="text" class="input-search" name="title" placeholder="product">
+                    <button type="submit" class="search-btn link"><i class="ri-search-line"></i></button>
+                </div>
+            </form>
+        </div>
+        <div class="flex-center">
+            <a href="#" class="flex-center link"><i class="ri-shopping-cart-line cart"></i></a>
+            <div th:if="${user.isActive()}" th:remove="tag">
+                <div th:if="${user.isAdmin()}" th:remove="tag">
+                    <a href="/admin" class="admin flex-center link"><i class="ri-admin-line"></i></a>
+                </div>
+                <a href="#" class="avatar flex-center link"><i class="ri-account-circle-line"></i></a>
+            </div>
+            <div th:unless="${user.isActive()}" th:remove="tag">
+                <a href="/login" class="user flex-center link"><i class="ri-user-fill"></i>Login</a>
+                <a href="/registration" class="user flex-center link"><i class="ri-indent-increase"></i>Register</a>
+            </div>
             <div class="bx bx-menu" id="menu-icon"></div>
         </div>
     </div>
